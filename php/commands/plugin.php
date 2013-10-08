@@ -79,21 +79,8 @@ class Plugin_Command extends \WP_CLI\CommandWithUpgrade {
 	 *
 	 *     wp plugin search dsgnwrks --fields=name,version,slug,rating,num_ratings
 	 */
-	public function search( $args, $assoc_args = array() ) {
-		$term = $args[0];
-
-		$defaults = array(
-			'per-page' => 10,
-			'fields' => array( 'name', 'slug', 'rating' )
-		);
-		$assoc_args = array_merge( $defaults, $assoc_args );
-
-		$api = plugins_api( 'query_plugins', array(
-			'per_page' => (int) $assoc_args['per-page'],
-			'search' => $term,
-		) );
-
-		parent::_search( $api, $fields, $assoc_args, 'plugin' );
+	public function search( $args, $assoc_args ) {
+		parent::_search( $args, $assoc_args );
 	}
 
 	protected function status_single( $args ) {
